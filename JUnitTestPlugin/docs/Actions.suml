@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Classdiagram>
+  <settings>
+    <option name="layoutOnChanges" value="false" />
+    <option name="paintDepends" value="true" />
+    <option name="paintExtends" value="true" />
+    <option name="paintInner" value="true" />
+    <option name="paintUses" value="true" />
+    <option name="paintImplements" value="true" />
+  </settings>
+  <classes>
+    <class name="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassActionHandler" x="330" y="794">
+      <option name="fieldsExpanded" value="true" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="com.intellij.openapi.actionSystem.AnAction" x="143" y="550">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.actions.HandledAction" x="128" y="680">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.UntestedMethodListProcessor" x="718" y="989">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassAction" x="68" y="798">
+      <option name="fieldsExpanded" value="true" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.actions.ActionHandler" x="322" y="680">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.TestMethodProcessor" x="589" y="1160">
+      <option name="fieldsExpanded" value="true" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.GoToUnitTestProcessor" x="470" y="994">
+      <option name="fieldsExpanded" value="true" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.ClassMethodListAction" x="705" y="701">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.GoToTestedClassProcessor" x="237" y="994">
+      <option name="fieldsExpanded" value="true" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.JUnitTestCaseProcessor" x="337" y="1250">
+      <option name="fieldsExpanded" value="true" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+  </classes>
+  <stickycomponents />
+  <textcomponents />
+  <connectors>
+    <connector from="org.intellij.plugins.actions.HandledAction" to="com.intellij.openapi.actionSystem.AnAction">
+      <anchor constraint="1" type="2" x="178" y="680" />
+      <anchor constraint="1" type="2" x="178" y="617" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.GoToUnitTestProcessor" to="org.intellij.plugins.junit.actions.TestMethodProcessor">
+      <anchor constraint="1" type="2" x="628" y="1121" />
+      <anchor constraint="1" type="2" x="657" y="1160" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassActionHandler" to="org.intellij.plugins.junit.actions.GoToUnitTestProcessor">
+      <anchor constraint="1" type="2" x="538" y="891" />
+      <anchor constraint="1" type="2" x="564" y="994" />
+      <decorator type="4" description="-  goToUnitTestProcessor" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.UntestedMethodListProcessor" to="org.intellij.plugins.junit.actions.TestMethodProcessor">
+      <anchor constraint="1" type="2" x="794" y="1056" />
+      <anchor constraint="1" type="2" x="738" y="1160" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassActionHandler" to="org.intellij.plugins.junit.actions.GoToTestedClassProcessor">
+      <anchor constraint="1" type="2" x="480" y="891" />
+      <anchor constraint="1" type="2" x="384" y="994" />
+      <decorator type="4" description="-  goToTestedClassProcessor" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.ClassMethodListAction" to="org.intellij.plugins.actions.HandledAction">
+      <anchor constraint="1" type="2" x="705" y="717" />
+      <anchor constraint="1" type="2" x="228" y="707" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.actions.HandledAction" to="org.intellij.plugins.actions.ActionHandler">
+      <anchor constraint="1" type="2" x="228" y="706" />
+      <anchor constraint="1" type="2" x="322" y="706" />
+      <decorator type="4" description="-  NULL_HANDLER" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassAction" to="org.intellij.plugins.actions.HandledAction">
+      <anchor constraint="1" type="2" x="176" y="798" />
+      <anchor constraint="1" type="2" x="178" y="732" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="com.intellij.openapi.actionSystem.AnAction" to="com.intellij.openapi.actionSystem.AnAction">
+      <anchor constraint="1" type="2" x="181" y="617" />
+      <anchor constraint="1" type="1" x="181" y="642" />
+      <anchor constraint="1" type="1" x="225" y="642" />
+      <anchor constraint="1" type="1" x="225" y="583" />
+      <anchor constraint="1" type="2" x="215" y="583" />
+      <decorator type="4" description="+  EMPTY_ARRAY" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.GoToTestedClassProcessor" to="org.intellij.plugins.junit.actions.JUnitTestCaseProcessor">
+      <anchor constraint="1" type="2" x="348" y="1121" />
+      <anchor constraint="1" type="2" x="396" y="1250" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.TestMethodProcessor" to="org.intellij.plugins.junit.actions.JUnitTestCaseProcessor">
+      <anchor constraint="1" type="2" x="589" y="1256" />
+      <anchor constraint="1" type="2" x="497" y="1282" />
+      <decorator type="2" description="" />
+    </connector>
+  </connectors>
+</Classdiagram>
+

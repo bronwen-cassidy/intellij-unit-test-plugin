@@ -1,0 +1,51 @@
+<idea-plugin>
+    <name>@PLUGIN.NAME@</name>
+    <description>@PLUGIN.DESCRIPTION@</description>
+    <version>@PLUGIN.VERSION@</version>
+    <vendor email="@PLUGIN.VENDOR.EMAIL@" url="@PLUGIN.URL@">@PLUGIN.VENDOR.NAME@</vendor>
+    <idea-version since-build="@IDEA.BUILD@"/>
+    <change-notes>
+        <![CDATA[
+            @PLUGIN.CHANGES@
+     ]]>
+    </change-notes>
+
+    <project-components>
+        <component>
+            <implementation-class>org.intellij.plugins.beans.PluginBeanFactory</implementation-class>
+        </component>
+        <component>
+            <implementation-class>org.intellij.plugins.junit.config.ClassPatternConfig</implementation-class>
+            <option name="workspace" value="true"/>
+        </component>
+        <component>
+            <implementation-class>org.intellij.plugins.junit.config.ClassTemplateConfig</implementation-class>
+            <option name="workspace" value="true"/>
+        </component>
+        <component>
+            <implementation-class>org.intellij.plugins.junit.config.MethodTemplateConfig</implementation-class>
+            <option name="workspace" value="true"/>
+        </component>
+        <component>
+            <implementation-class>org.intellij.plugins.junit.config.JUnitTestConfiguration</implementation-class>
+            <option name="workspace" value="true"/>
+        </component>
+        <component>
+            <implementation-class>org.intellij.plugins.junit.config.JUnitTestConfigurable</implementation-class>
+        </component>
+    </project-components>
+
+    <actions>
+        <action id="JUnitTestPlugin.ToggleTestCaseTestedClassAction" class="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassAction" text="Go to Tested _Class">
+          <keyboard-shortcut first-keystroke="control shift T" keymap="$default"/>
+          <add-to-group group-id="GoToMenu" anchor="last"/>
+          <add-to-group group-id="ProjectViewPopupMenu" anchor="before" relative-to-action="FindUsages"/>
+          <add-to-group group-id="StructureViewPopupMenu" anchor="before" relative-to-action="FindUsages"/>
+        </action>
+        <action id="JUnitTestPlugin.ClassMethodListAction" class="org.intellij.plugins.junit.actions.ClassMethodListAction" text="Show [Un]Tested Methods">
+          <keyboard-shortcut first-keystroke="control shift alt T" keymap="$default"/>
+          <add-to-group group-id="GoToMenu" anchor="last"/>
+        </action>
+    </actions>
+
+</idea-plugin>

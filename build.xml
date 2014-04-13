@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="junit test plugin" default="release" basedir=".">
+
+   <property file="build.properties"/>
+   <property file="JUnitTestPlugin/version.txt"/>
+
+   <!-- junit properties -->
+   <property name="junit.haltonerror" value="false"/>
+   <property name="junit.haltonfailure" value="false"/>
+   <property name="junit.showoutput" value="false"/>
+   <property name="junit.printsummary" value="true"/>
+   <property name="junit.fork" value="yes"/>
+
+   <!-- jar dependancies -->
+   <property name="tools.lib" value="lib/tools"/>
+   <property name="runtime.lib" value="lib/runtime"/>
+
+
+   <!-- src classes directories -->
+   <property name="junit.plugin.dir" value="JUnitTestPlugin"/>
+   <property name="plugin.src.dir" value="${junit.plugin.dir}/src"/>
+   <property name="deploy.dir" value="dist/deploy"/>
+   <property name="deploy.plugin.dir" value="${deploy.dir}/unitTest"/>
+   <property name="classes.dir" value="dist/classes"/>
+
+   <property name="build.compiler" value="modern"/>
+   <property name="build.compiler" value="modern"/>
+   <property name="junit.jar.name" value="unitTest.jar"/>
+
+   <!-- global project information -->
+   <property name="project.name" value="unitTest"/>
+   <property name="plugin.wiki.name" value="JUnitTestPlugin"/>
+   <property name="plugin.description" value="Simplify creation and maintenance of junit tests"/>
+   <property name="plugin.vendor.name" value="Jacques Morel"/>
+   <property name="plugin.vendor.email" value="Jacques Morel"/>
+   <property name="dir.version.file" value="org/intellij/plugins/junit"/>
+   <property name="version.class.package" value="org.intellij.plugins.junit"/>
+
+   <!-- Project name and version info -->
+   <property name="build.number" value="4"/>
+   <property name="minor.number" value="0"/>
+   <property name="major.number" value="1"/>
+
+   <property name="plugin.name" value="${project.name}"/>
+   <property name="plugin.fullname" value="${project.name}"/>
+   <property name="plugin.vendor" value="${user.name}"/>
+   <property name="plugin.idea.version.min" value="7.0.3"/>
+   <property name="plugin.idea.version.max" value="9.0.1"/>
+   <property name="plugin.doc.url" value="http://www.intellij.org/twiki/bin/view/Main/${plugin.wiki.name}"/>
+   <property name="plugin.bin.url"
+             value="http://www.intellij.org/twiki/pub/Main/${plugin.wiki.name}/${plugin.name}.zip"/>
+   <property name="plugin.src.url"
+             value="http://www.intellij.org/twiki/pub/Main/${plugin.wiki.name}/${plugin.name}-src.zip"/>
+
+   <property name="latest.changes.file" value="${junit.plugin.dir}/LatestChanges.html"/>
+
+   <property name="test.pattern" value="**/*Test.class"/>
+   <property name="test.app.reports.dir" value="dist/test"/>
+
+   <property name="sandbox.plugin.name" value="junit-test-plugin"/>
+
+   <path id="common.project.classpath">
+      <fileset dir="${tools.lib}">
+         <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${runtime.lib}">
+         <include name="**/*.jar"/>
+      </fileset>
+   </path>
+
+    <path id="project.classpath">
+      <path refid="common.project.classpath"/>
+      <fileset dir="${idea.lib}">
+         <include name="**/*.jar"/>
+      </fileset>
+   </path>
+
+   <target name="clean">
+      <delete dir="dist"/>
+   </target>
+
+   <target name="init" depends="clean">
+      <tstamp/>
+      <tstamp>
+         <format property="year" pattern="yyyy"/>
+      </tstamp>
+      <tstamp>
+         <format property="month" pattern="MM"/>
+      </tstamp>
+      <tstamp>
+         <format property="day" pattern="dd"/>
+      </tstamp>
+      <tstamp>
+         <format property="build.time" pattern="MM/dd/yyyy hh:mm aa"/>
+      </tstamp>
+      <mkdir dir="dist"/>
+      <mkdir dir="${deploy.dir}"/>
+      <mkdir dir="${deploy.plugin.dir}"/>
+      <mkdir dir="${deploy.plugin.dir}/lib"/>
+      <mkdir dir="${classes.dir}"/>
+      <copy todir="${classes.dir}" overwrite="yes" failonerror="yes" filtering="off" includeemptydirs="no">
+         <fileset dir="${plugin.src.dir}">
+            <exclude name="**/*.java"/>
+         </fileset>
+      </copy>
+      <copy todir="${classes.dir}/icons" overwrite="yes" failonerror="yes" filtering="off" includeemptydirs="no">
+         <fileset dir="${plugin.src.dir}/icons">
+            <include name="*.*"/>
+         </fileset>
+      </copy>
+      <copy todir="${classes.dir}/META-INF">
+         <fileset dir="${plugin.src.dir}/META-INF">
+            <include name="*.xml"/>
+         </fileset>
+      </copy>
+      <available property="version.exists" file="${junit.plugin.dir}/version.txt"/>
+      <antcall target="initVersion"/>
+   </target>
+
+   <target name="initVersion">
+      <antcall target="nextBuild"/>
+   </target>
+
+   <target name="nextBuild" description="Increment build number">
+      <propertyfile file="${junit.plugin.dir}/version.txt">
+         <entry key="build.number" type="int" default="0" operation="+" value="1"/>
+      </propertyfile>
+   </target>
+
+   <!-- Increment version, release and/or build numbers  -->
+   <target name="nextMajorVersion" description="Increment version number">
+      <propertyfile file="${junit.plugin.dir}/version.txt">
+         <entry key="major.number" type="int" default="0" operation="+" value="1"/>
+         <entry key="minor.number" type="int" operation="=" value="1"/>
+         <entry key="build.number" type="int" operation="=" value="0"/>
+      </propertyfile>
+   </target>
+
+   <target name="nextMinorVersion" description="Increment release number">
+      <propertyfile file="${junit.plugin.dir}/version.txt">
+         <entry key="minor.number" type="int" default="0" operation="+" value="1"/>
+         <entry key="build.number" type="int" operation="=" value="0"/>
+      </propertyfile>
+   </target>
+
+   <target name="setDeveloperBuildVersion" depends="init">
+      <property name="plugin.version" value="${major.number}.${minor.number} build ${build.number} at ${build.time}"/>
+   </target>
+
+   <target name="setReleaseBuildVersion">
+      <property name="plugin.release.version" value="${major.number}.${minor.number}${build.number}"/>
+   </target>
+
+   <target name="generateVersionTag" depends="setDeveloperBuildVersion" if="dir.version.file">
+      <property name="version.file" value="${plugin.src.dir}/${dir.version.file}/Version.java"/>
+      <filter token="version" value="${plugin.version}"/>
+      <filter token="package" value="${version.class.package}"/>
+      <copy file="${plugin.src.dir}/Version.javatmpl" tofile="${version.file}" filtering="on" overwrite="true"/>
+   </target>
+
+   <target name="buildPluginXml" depends="setDeveloperBuildVersion, setReleaseBuildVersion" description="Create plugin deployment descriptors">
+      <loadfile property="plugin.changes" srcFile="${latest.changes.file}" failonerror="true"/>
+      <echo message="Changes are:\n ${plugin.changes}"/>
+      <!-- Insert version information -->
+      <replace dir="${classes.dir}/META-INF" includes="**/*.xml **/*.html">
+         <replacefilter token="@IDEA.VERSION.MIN@" value="${plugin.idea.version.min}"/>
+         <replacefilter token="@IDEA.VERSION.MAX@" value="${plugin.idea.version.max}"/>
+
+         <replacefilter token="@PLUGIN.NAME@" value="${plugin.fullname}"/>
+         <replacefilter token="@PLUGIN.VENDOR.NAME@" value="${plugin.vendor.name}"/>
+         <replacefilter token="@PLUGIN.VENDOR@" value="${plugin.vendor.name}"/>
+         <replacefilter token="@PLUGIN.VENDOR.EMAIL@" value="${plugin.vendor.email}"/>
+         <replacefilter token="@PLUGIN.URL@" value="${plugin.doc.url}"/>
+         <replacefilter token="@PLUGIN.DESCRIPTION@" value="${plugin.description}"/>
+         <replacefilter token="@PLUGIN.VERSION@" value="${plugin.release.version}"/>
+         <replacefilter token="@PLUGIN.CHANGES@" value="${plugin.changes}"/>
+         <replacefilter token="@IDEA.BUILD@" value="${idea.build}"/>
+         <replacefilter token="@PLUGIN.DOCURL@" value="${plugin.doc.url}"/>
+         <replacefilter token="@PLUGIN.BINURL@" value="${plugin.bin.url}"/>
+         <replacefilter token="@PLUGIN.SRCURL@" value="${plugin.src.url}"/>
+         <replacefilter token="@PLUGIN.MODIFIED.YEAR@" value="${year}"/>
+         <replacefilter token="@PLUGIN.MODIFIED.MONTH@" value="${month}"/>
+         <replacefilter token="@PLUGIN.MODIFIED.DAY@" value="${day}"/>
+      </replace>
+   </target>
+
+    <target name="release.compile" depends="generateVersionTag" description="compile classes for selena">
+      <javac sourcepath="" destdir="dist/classes"
+             srcdir="${plugin.src.dir}"
+             source="1.5" target="1.5" debug="true" deprecation="true"
+             optimize="true" failonerror="true" compiler="modern" verbose="true"
+             executable="${idea.dir}\jre\bin\java.exe">
+         <classpath refid="project.classpath"/>         
+      </javac>
+   </target>
+
+    <target name="debug.compile" depends="init, release.compile"
+           description="clean and compile for selena for running in debug"/>
+
+   <target name="junit.plugin.compile.release" depends="init, buildPluginXml, release.compile"
+           description="compile the junit plugin for release"/>
+
+    <target name="test.compile" depends="init" description="compile classes for selena tests needs 1.5">
+      <javac destdir="dist/classes" target="1.5" debug="true" deprecation="true"
+             optimize="true" failonerror="true" executable="${idea.dir}/jre/bin/java.exe">
+         <classpath refid="project.classpath"/>
+         <src path="${plugin.src.dir}"/>
+      </javac>
+   </target>
+
+   <target name="plugin.jar" depends="junit.plugin.compile.release">
+
+      <manifest file="${classes.dir}/META-INF/MANIFEST.MF">
+         <attribute name="Built-By" value="${user.name}"/>
+         <section name="org/intellij/plugins/junit">
+            <attribute name="Specification-Title" value="${plugin.fullname}"/>
+            <attribute name="Specification-Version" value="${version}"/>
+            <attribute name="Specification-Vendor" value="${plugin.vendor}"/>
+            <attribute name="Implementation-Title" value="${plugin.fullname}"/>
+            <attribute name="Implementation-Version" value="${version} ${TODAY}"/>
+            <attribute name="Implementation-Vendor" value="${plugin.vendor}"/>
+         </section>
+      </manifest>
+
+      <jar jarfile="${deploy.plugin.dir}/lib/${junit.jar.name}"
+           excludes=".dependency-info" basedir="${classes.dir}"
+           manifest="${classes.dir}/META-INF/MANIFEST.MF"/>
+   </target>
+
+    <target name="release" depends="plugin.jar" description="deploys the junit test plugin to selena idea plugins directory">
+      <copy todir="${deploy.plugin.dir}/lib">
+         <fileset dir="${runtime.lib}"/>
+      </copy>
+      <copy todir="${idea.plugin.dir}" overwrite="true">
+         <fileset dir="${deploy.dir}"/>
+      </copy>
+   </target>
+
+    <target name="plugin.debug.deploy" depends="init, release.compile, buildPluginXml" description="deploys the junit test plugin to selena sandbox">
+      <copy todir="${sandbox.plugin.dir}/plugins/${sandbox.plugin.name}/META-INF" overwrite="true">
+         <fileset dir="${classes.dir}/META-INF">
+            <include name="*.xml"/>
+         </fileset>
+      </copy>
+      <copy todir="${sandbox.plugin.dir}/plugins/${sandbox.plugin.name}/classes" overwrite="true">
+         <fileset dir="${classes.dir}"/>
+      </copy>
+      <copy todir="${sandbox.plugin.dir}/plugins/${sandbox.plugin.name}/lib" overwrite="true">
+         <fileset dir="${runtime.lib}"/>
+      </copy>
+   </target>
+
+   <target name="all" depends="release" description="Deploys the plugin to the selena version"/>
+
+</project>

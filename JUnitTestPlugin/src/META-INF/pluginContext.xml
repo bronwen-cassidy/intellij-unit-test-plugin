@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+
+<beans default-autowire="autodetect" default-dependency-check="objects">
+  <!-- Beans  -->
+  <bean class="org.intellij.plugins.ui.IconManager">
+    <property name="iconPathsByName">
+      <map>
+        <entry key="goToTestUntested">
+          <value>/icons/goToTestRedPlus.png</value>
+        </entry>
+        <entry key="goToTestTested">
+          <value>/icons/goToTestYellow.png</value>
+        </entry>
+        <entry key="method">
+          <value>/icons/method.png</value>
+        </entry>
+        <entry key="template">
+          <value>/icons/template.png</value>
+        </entry>
+      </map>
+    </property>
+  </bean>
+  <bean class="org.intellij.plugins.util.CommandUtil"/>
+  <bean class="org.intellij.plugins.util.PluginPsiUtil"/>
+  <bean class="org.intellij.plugins.util.TemplateEngine"/>
+  <bean class="org.intellij.plugins.util.PsiDirectoryUtil"/>
+  <bean class="org.intellij.plugins.util.PsiClassManager"/>
+  <bean class="org.intellij.plugins.ui.MessageHandler"/>
+  <bean class="org.intellij.plugins.junit.template.PsiClassVelocityFactory"/>
+  <bean class="org.intellij.plugins.junit.template.PsiMethodVelocityFactory"/>
+
+  <bean class="org.intellij.plugins.junit.template.ClassTemplateContextBuilder"/>
+  <bean class="org.intellij.plugins.junit.ClassDefFactory"/>
+  <bean class="org.intellij.plugins.junit.MethodDefFactory"/>  
+  <bean class="org.intellij.plugins.junit.ClassPattern"/>
+  <bean class="org.intellij.plugins.junit.ClassLocator" dependency-check="none"/>
+  <bean class="org.intellij.plugins.junit.MethodLocator"/>
+  <bean class="org.intellij.plugins.junit.ClassUntestedMethodsLocator"/>
+  <bean class="org.intellij.plugins.junit.ClassRefactoringListener" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.MethodRefactoringListener" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.RefactorerListenerProvider"/>
+  <bean class="org.intellij.plugins.junit.UntestedMethodHighlighter"/>
+  <bean class="org.intellij.plugins.junit.config.ClassPatternPanel" dependency-check="none"/>
+  <bean class="org.intellij.plugins.junit.config.ClassPatternConfigEditor"/>
+  <bean class="org.intellij.plugins.junit.template.TestClassCreator" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.template.TestMethodCreator" singleton="false"/>
+  <!--  DEBT Use parent bean to refactor duplication -->
+  <bean class="org.intellij.plugins.junit.template.ClassTemplateSelectorCreator" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.template.MethodTemplateSelectorCreator" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.actions.EditorHelper"/>
+  <bean class="org.intellij.plugins.junit.actions.TestMethodSelectDialog" singleton="false" dependency-check="none"/>
+  <bean class="org.intellij.plugins.junit.actions.TestClassSelectDialog" singleton="false" dependency-check="none"/>
+
+  <bean class="org.intellij.plugins.ui.SelectDialog" singleton="false" dependency-check="none"/>
+
+  <!-- Action handlers  -->
+  <bean class="org.intellij.plugins.junit.actions.ToggleTestCaseTestedClassActionHandler" autowire="constructor" singleton="false" dependency-check="simple"/>
+  <bean class="org.intellij.plugins.junit.actions.ClassMethodListActionHandler" autowire="constructor" singleton="false" dependency-check="simple"/>
+  <bean class="org.intellij.plugins.junit.actions.GoToTestCaseActionHandler" autowire="constructor" singleton="false" dependency-check="simple"/>
+
+  <bean class="org.intellij.plugins.junit.actions.GoToTestedClassProcessor" autowire="constructor" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.actions.GoToUnitTestProcessor" autowire="constructor" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.actions.UntestedMethodListProcessor" autowire="constructor" singleton="false"/>
+  <bean class="org.intellij.plugins.junit.config.ClassPatternDesc"/>
+
+  <!--   <bean id="_cglibBeanNameProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">-->
+  <!--      <property name="beanNames">-->
+  <!--         <value>org.intellij.plugins.tdd.ActivityTracker</value>-->
+  <!--      </property>-->
+  <!--      <property name="proxyTargetClass">-->
+  <!--         <description>Use the inherited ProxyConfig property to force CGLIB proxying</description>-->
+  <!--         <value>true</value>-->
+  <!--      </property>-->
+  <!--      <property name="interceptors">-->
+  <!--         <description>Interceptors and Advisors to apply automatically</description>-->
+  <!--         <list>-->
+  <!--            <ref local="activityBoundaryAdvisor"/>-->
+  <!--         </list>-->
+  <!--      </property>-->
+  <!--   </bean>-->
+  <!-- -->
+  <!--   <bean id="activityBoundaryAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAroundAdvisor">-->
+  <!--      <property name="interceptor"><ref local="activityHistoryAdvisor"/></property>-->
+  <!--      <property name="pattern"><value>.*\.(start|stop|restart)</value></property>-->
+  <!--   </bean>-->
+  <!-- -->
+  <!--   <bean id="activityHistoryAdvisor"-->
+  <!--		class="org.springframework.aop.interceptor.DebugInterceptor"-->
+  <!--	/>-->
+
+</beans>

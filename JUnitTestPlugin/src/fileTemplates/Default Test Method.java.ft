@@ -1,0 +1,3 @@
+public void ${METHOD_NAME}() throws Exception {
+    fail("Test is not implemented");
+}

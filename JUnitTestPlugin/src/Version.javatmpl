@@ -1,0 +1,5 @@
+package @package@;
+
+public class Version implements PluginVersion {
+	public String getVersion() { return "@version@"; }
+}

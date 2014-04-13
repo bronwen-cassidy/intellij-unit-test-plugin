@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Classdiagram>
+  <settings>
+    <option name="layoutOnChanges" value="true" />
+    <option name="paintDepends" value="true" />
+    <option name="paintExtends" value="true" />
+    <option name="paintInner" value="true" />
+    <option name="paintUses" value="true" />
+    <option name="paintImplements" value="true" />
+  </settings>
+  <classes>
+    <class name="org.intellij.plugins.junit.actions.UntestedMethodListProcessor" x="1551" y="499">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="true" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.TestMethodProcessor" x="1050" y="286">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="true" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="true" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.GoToUnitTestProcessor" x="527" y="586">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="true" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="true" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.GoToTestedClassProcessor" x="1780" y="158">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="true" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="org.intellij.plugins.junit.actions.JUnitTestCaseProcessor" x="1321" y="100">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="true" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="true" />
+    </class>
+  </classes>
+  <stickycomponents />
+  <textcomponents />
+  <connectors>
+    <connector from="org.intellij.plugins.junit.actions.GoToUnitTestProcessor" to="org.intellij.plugins.junit.actions.TestMethodProcessor">
+      <anchor constraint="1" type="2" x="1312" y="586" />
+      <anchor constraint="1" type="2" x="1416" y="398" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.UntestedMethodListProcessor" to="org.intellij.plugins.junit.actions.TestMethodProcessor">
+      <anchor constraint="1" type="2" x="1604" y="499" />
+      <anchor constraint="1" type="2" x="1503" y="398" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.GoToTestedClassProcessor" to="org.intellij.plugins.junit.actions.JUnitTestCaseProcessor">
+      <anchor constraint="1" type="2" x="1780" y="188" />
+      <anchor constraint="1" type="2" x="1771" y="186" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="org.intellij.plugins.junit.actions.TestMethodProcessor" to="org.intellij.plugins.junit.actions.JUnitTestCaseProcessor">
+      <anchor constraint="1" type="2" x="1476" y="286" />
+      <anchor constraint="1" type="2" x="1521" y="197" />
+      <decorator type="2" description="" />
+    </connector>
+  </connectors>
+</Classdiagram>
+

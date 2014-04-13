@@ -1,0 +1,32 @@
+public void ${METHOD_NAME}() throws Exception {
+    #if($TESTED_METHOD.Exceptions.size() > 0)
+    try {
+       ${TESTED_CLASS_VARIABLE_NAME}.${TESTED_METHOD.Name}(#foreach( $arg in $TESTED_METHOD.Parameters ) $arg.Name#if($velocityCount<${TESTED_METHOD.Parameters.size()}),#end #end);
+       fail("Should have thrown an Exception");
+    }
+      #foreach( $ex in ${TESTED_METHOD.Exceptions})
+    catch ($ex ex) {}
+      #end
+    #else
+      fail("Test not implemented yet");
+    #end
+   }
+
+#*
+METHOD_NAME: name of test method
+TESTED_METHOD: method under test (See structure below)
+TESTED_CLASS_VARIABLE_NAME: fixture variable name of the class under test
+TESTED_CLASS_NAME: name of class under test
+TESTED_CLASS_PACKAGE_NAME: package of class under test
+
+Types
+Method type:
+   Name (string)
+   Return (string)
+   Parameters (list of Parameter)
+   Exceptions (list of string)
+
+Parameter type:
+   Type (string)
+   Name (string)
+*#
